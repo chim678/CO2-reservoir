@@ -14,7 +14,6 @@ function App() {
     <Canvas >
       <ReservoirModel />
       <Light intensity = {0.3} brightness1={25} color1={"#707682"} brightness2={60} color2 = {"#6086b5"} />
-      <Displays />
       <Experience />
     </Canvas>
   )
