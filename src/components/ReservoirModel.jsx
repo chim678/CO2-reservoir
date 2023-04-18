@@ -1,30 +1,44 @@
 import React, { useState } from "react";
 import { useGLTF } from "@react-three/drei";
+import * as THREE from "three";
 
 const ReservoirModel = (props) => {
   const { nodes, materials } = useGLTF("./models/ReservoirModel_3.glb");
   const [active, setActive] = useState(true);
+  const [hovered, hover] = useState(false)
+  const activeColor = new THREE.MeshBasicMaterial({ color: 0x00ff00, opacity: 0.5, transparent: true });
+
   return (
     <group {...props} dispose={null}>
       <mesh
         geometry={nodes.Water.geometry}
         material={materials.WaterHoloMat}
-        scale={active ? 1.1 : 1}
         position={[-0.07, 44.52, 0.04]}
-        //onClick={(e) => console.log('click')}
-        onClick={() => setActive(!active)}
+        //onClick={(e) => console.log('water')}
+        //onClick={() => setActive(!active)}
       />
       <group position={[-20.45, 37.25, 22.43]} rotation={[0, Math.PI / 2, 0]}>
         <mesh
           geometry={nodes.Wellhead1_1.geometry}
-          material={materials.Casing}
+          material={hovered ?activeColor : materials.Casing}
+          //scale={hovered ? 1.1 : 1}
+          //onClick={(e) => console.log('wellhead1')}
+          onPointerOver={(event) => hover(true)}
+          onPointerOut={(event) => hover(false)}
+          onClick={() => setActive(!active)}
         />
-        <mesh geometry={nodes.Wellhead1_2.geometry} material={materials.Nuts} />
+        <mesh 
+        geometry={nodes.Wellhead1_2.geometry} 
+        //scale={hovered ? 1.3 : 1}
+        //material={materials.Nuts} 
+        material={hovered ?activeColor : materials.Casing}
+        />
       </group>
       <group position={[-6.79, 37.25, 22.43]} rotation={[0, Math.PI / 2, 0]}>
         <mesh
           geometry={nodes.Wellhead2_1.geometry}
           material={materials.Casing}
+          onClick={(e) => console.log("wellhead2")}
         />
         <mesh geometry={nodes.Wellhead2_2.geometry} material={materials.Nuts} />
       </group>
@@ -32,6 +46,7 @@ const ReservoirModel = (props) => {
         <mesh
           geometry={nodes.Wellhead3_1.geometry}
           material={materials.Casing}
+          onClick={(e) => console.log("wellhead3")}
         />
         <mesh geometry={nodes.Wellhead3_2.geometry} material={materials.Nuts} />
       </group>
@@ -39,6 +54,7 @@ const ReservoirModel = (props) => {
         <mesh
           geometry={nodes.Wellhead4_1.geometry}
           material={materials.Casing}
+          onClick={(e) => console.log("wellhead4")}
         />
         <mesh geometry={nodes.Wellhead4_2.geometry} material={materials.Nuts} />
       </group>
@@ -103,8 +119,7 @@ const ReservoirModel = (props) => {
       />
     </group>
   );
-}
-
+};
 
 export default ReservoirModel;
 useGLTF.preload("./models/ReservoirModel_3.glb");
