@@ -5,8 +5,22 @@ import * as THREE from "three";
 const ReservoirModel = (props) => {
   const { nodes, materials } = useGLTF("./models/ReservoirModel_3.glb");
   const [active, setActive] = useState(true);
-  const [hovered, hover] = useState(false)
-  const activeColor = new THREE.MeshBasicMaterial({ color: 0x00ff00, opacity: 0.5, transparent: true });
+  const [hovered_well1, hover_well1] = useState(false);
+  const [hovered_well2, hover_well2] = useState(false);
+  const [hovered_well3, hover_well3] = useState(false);
+  const [hovered_well4, hover_well4] = useState(false);
+
+  //ToDo: move the cursor logic out of the model
+  if (hovered_well1 || hovered_well2 || hovered_well3 || hovered_well4){
+    document.body.style.cursor = 'pointer'
+  }
+  else document.body.style.cursor = 'default';
+
+  const activeColor = new THREE.MeshBasicMaterial({
+    color: 0x00ff00,
+    opacity: 0.8,
+    transparent: true,
+  });
 
   return (
     <group {...props} dispose={null}>
@@ -20,43 +34,56 @@ const ReservoirModel = (props) => {
       <group position={[-20.45, 37.25, 22.43]} rotation={[0, Math.PI / 2, 0]}>
         <mesh
           geometry={nodes.Wellhead1_1.geometry}
-          material={hovered ?activeColor : materials.Casing}
+          material={hovered_well1 ? activeColor : materials.Casing}
           //scale={hovered ? 1.1 : 1}
           //onClick={(e) => console.log('wellhead1')}
-          onPointerOver={(event) => hover(true)}
-          onPointerOut={(event) => hover(false)}
+          onPointerOver={(event) => hover_well1(true)}
+          onPointerOut={(event) => hover_well1(false)}
           onClick={() => setActive(!active)}
         />
-        <mesh 
-        geometry={nodes.Wellhead1_2.geometry} 
-        //scale={hovered ? 1.3 : 1}
-        //material={materials.Nuts} 
-        material={hovered ?activeColor : materials.Casing}
+        <mesh
+          geometry={nodes.Wellhead1_2.geometry}
+          material={hovered_well1 ? activeColor : materials.Nuts}
         />
       </group>
       <group position={[-6.79, 37.25, 22.43]} rotation={[0, Math.PI / 2, 0]}>
         <mesh
           geometry={nodes.Wellhead2_1.geometry}
-          material={materials.Casing}
+          material={hovered_well2 ? activeColor : materials.Casing}
+          onPointerOver={(event) => hover_well2(true)}
+          onPointerOut={(event) => hover_well2(false)}
           onClick={(e) => console.log("wellhead2")}
         />
-        <mesh geometry={nodes.Wellhead2_2.geometry} material={materials.Nuts} />
+        <mesh
+          geometry={nodes.Wellhead2_2.geometry}
+          material={hovered_well2 ? activeColor : materials.Nuts}
+        />
       </group>
       <group position={[6.53, 37.25, 22.43]} rotation={[0, Math.PI / 2, 0]}>
         <mesh
           geometry={nodes.Wellhead3_1.geometry}
-          material={materials.Casing}
+          material={hovered_well3 ? activeColor : materials.Casing}
+          onPointerOver={(event) => hover_well3(true)}
+          onPointerOut={(event) => hover_well3(false)}
           onClick={(e) => console.log("wellhead3")}
         />
-        <mesh geometry={nodes.Wellhead3_2.geometry} material={materials.Nuts} />
+        <mesh
+          geometry={nodes.Wellhead3_2.geometry}
+          material={hovered_well3 ? activeColor : materials.Nuts}
+        />
       </group>
       <group position={[20.85, 37.25, 22.43]} rotation={[0, Math.PI / 2, 0]}>
         <mesh
           geometry={nodes.Wellhead4_1.geometry}
-          material={materials.Casing}
+          material={hovered_well4 ? activeColor : materials.Casing}
+          onPointerOver={(event) => hover_well4(true)}
+          onPointerOut={(event) => hover_well4(false)}
           onClick={(e) => console.log("wellhead4")}
         />
-        <mesh geometry={nodes.Wellhead4_2.geometry} material={materials.Nuts} />
+        <mesh
+          geometry={nodes.Wellhead4_2.geometry}
+          material={hovered_well4 ? activeColor : materials.Nuts}
+        />
       </group>
       <mesh
         geometry={nodes.Pipe1.geometry}

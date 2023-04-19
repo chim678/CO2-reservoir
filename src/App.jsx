@@ -18,7 +18,7 @@ function App() {
         brightness2={60}
         color2={"#6086b5"}
       />
-      
+      < Displays />
       <Experience />
     </Canvas>
   );

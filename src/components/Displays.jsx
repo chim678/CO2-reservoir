@@ -16,33 +16,33 @@ function Line({ start, end }) {
     </line>
   );
 }
-function Points({ count = 1 }) {
-  const points = useMemo(() => {
-    const vertices = [];
-    vertices.push(-19.2, 40.36, 16.9);
-    return new BufferAttribute(new Float32Array(vertices), 3);
-  }, [count]);
-  const sprite = new THREE.TextureLoader().load("/Circle.svg");
+
+
+const Sphere = () => {
   return (
-    <points>
-      <bufferGeometry>
-        <bufferAttribute attach={"attributes-position"} {...points} />
-      </bufferGeometry>
-      <pointsMaterial
-        size={0.4}
-        map={sprite}
+    <mesh
+      position={[-20.45, 40.7, 22.9]}
+    >
+      <sphereBufferGeometry attach="geometry" args={[0.4]}  />
+      <meshBasicMaterial
+        attach="material"
+        color="red"
+        opacity={1}
         transparent={true}
-        alphaTest={0.5}
+        visible = {true}
       />
-    </points>
+    </mesh>
   );
-}
+};
+
+
+
 
 const Plane = ({ position, onClick, rotation }) => {
   return (
     <mesh
       onClick={onClick}
-      position={[-23.23, 53, 11.23]}
+      position={[-23.23, 53, 17]}
       rotation={[0, Math.PI / 4, -Math.PI / 2]}
     >
       <boxBufferGeometry attach="geometry" args={[8, 16, 0.05]} />
@@ -59,9 +59,9 @@ const Plane = ({ position, onClick, rotation }) => {
 const Displays = () => {
   return (
     <>
-      <Line start={[-19, 40, 17]} end={[-23.23, 49, 11.23]} />
+      <Line start={[-20.45, 40.7, 22.9]} end={[-23.23, 49, 17]} />
       <Plane />
-      <Points />
+      <Sphere />
     </>
   );
 };
