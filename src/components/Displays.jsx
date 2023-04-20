@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import React, { useLayoutEffect, useRef, useMemo } from "react";
-import { BufferAttribute, PlaneGeometry } from "three";
+import { Text } from "@react-three/drei";
 
 function Line({ start, end }) {
   const ref = useRef();
@@ -18,25 +18,36 @@ function Line({ start, end }) {
 }
 
 
+
+const Label = ({text}) => {
+  return (
+    <Text
+      //scale={[1.5, 1.5, 1.5]}
+      color="black"
+      anchorX="right" 
+      anchorY="left" 
+      position={[-23.23, 55.5, 17.2]}
+      rotation={[0, Math.PI / 4, 0]}
+    >
+  {text}
+    </Text>
+  );
+};
+
 const Sphere = () => {
   return (
-    <mesh
-      position={[-20.45, 40.7, 22.9]}
-    >
-      <sphereBufferGeometry attach="geometry" args={[0.4]}  />
+    <mesh position={[-20.45, 40.7, 22.9]}>
+      <sphereBufferGeometry attach="geometry" args={[0.4]} />
       <meshBasicMaterial
         attach="material"
-        color="red"
+        color="#7B1818"
         opacity={1}
         transparent={true}
-        visible = {true}
+        visible={true}
       />
     </mesh>
   );
 };
-
-
-
 
 const Plane = ({ position, onClick, rotation }) => {
   return (
@@ -62,6 +73,7 @@ const Displays = () => {
       <Line start={[-20.45, 40.7, 22.9]} end={[-23.23, 49, 17]} />
       <Plane />
       <Sphere />
+      <Label text={'WELLHEAD 1.1'}/>
     </>
   );
 };
