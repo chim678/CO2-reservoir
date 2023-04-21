@@ -2,6 +2,8 @@ import * as THREE from "three";
 import React, { useLayoutEffect, useRef, useMemo } from "react";
 import { Text } from "@react-three/drei";
 
+
+
 function Line({ start, end }) {
   const ref = useRef();
   useLayoutEffect(() => {
@@ -19,14 +21,15 @@ function Line({ start, end }) {
 
 
 
-const Label = ({text}) => {
+const Label = ({text, position, fontSize}) => {
   return (
     <Text
       //scale={[1.5, 1.5, 1.5]}
       color="black"
       anchorX="right" 
       anchorY="left" 
-      position={[-23.23, 55.5, 17.2]}
+      fontSize={fontSize}
+      position={position}
       rotation={[0, Math.PI / 4, 0]}
     >
   {text}
@@ -73,7 +76,10 @@ const Displays = () => {
       <Line start={[-20.45, 40.7, 22.9]} end={[-23.23, 49, 17]} />
       <Plane />
       <Sphere />
-      <Label text={'WELLHEAD 1.1'}/>
+      <Label text={'WELLHEAD 1.1'} position={[-23.23, 56, 17.2]} fontSize = {1}/>
+      <Label text={'Temperature:'} position={[-23.23, 54.5, 17.2]} fontSize = {0.8}/>
+      <Label text={'Pressure:'} position={[-23.23, 53.5, 17.2]} fontSize = {0.8}/>
+      <Label text={'MassFlow:'} position={[-23.23, 52.5, 17.2]} fontSize = {0.8}/>
     </>
   );
 };
