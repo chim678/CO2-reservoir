@@ -1,6 +1,24 @@
-import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
+import {
+  OrbitControls,
+  PerspectiveCamera,
+  useProgress,
+  Html,
+} from "@react-three/drei";
+import * as THREE from "three";
 //import GltfModel from "../utils/glbModel"
 
+
+export function Loader() {
+ 
+  const { progress } = useProgress();
+
+  return (
+    <Html center>
+      <span style={{ color: "black", fontSize: 22 }}>{Math.round(progress)} % loaded</span>
+    </Html>
+    
+  );
+}
 const Experience = () => {
   return (
     <>

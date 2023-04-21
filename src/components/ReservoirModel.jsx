@@ -2,15 +2,32 @@ import React, { useState } from "react";
 import { useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 
+import create from "zustand";
 
+import { mountStoreDevtool } from "simple-zustand-devtools";
+
+
+export const useStore = create((set) => ({
+  wellhead_state: false,
+  setWellhead_state: () => set((state) => ({ wellhead_state: !state.wellhead_state})),
+}));
+
+
+if (process.env.NODE_ENV === "development") {
+  mountStoreDevtool("Store", useStore);
+}
 
 const ReservoirModel = (props) => {
   const { nodes, materials } = useGLTF("./models/ReservoirModel_3.glb");
-  const [active, setActive] = useState(true);
+  //const [active, setActive] = useState(true);
   const [hovered_well1, hover_well1] = useState(false);
   const [hovered_well2, hover_well2] = useState(false);
   const [hovered_well3, hover_well3] = useState(false);
   const [hovered_well4, hover_well4] = useState(false);
+
+  const wellhead_state = useStore((state) => state.wellhead_state);
+  const setWellhead_state = useStore((state) => state.setWellhead_state);
+
 
   //ToDo: move the cursor logic out of the model
   if (hovered_well1 || hovered_well2 || hovered_well3 || hovered_well4){
@@ -23,7 +40,7 @@ const ReservoirModel = (props) => {
     opacity: 0.8,
     transparent: true,
   });
-
+ 
   return (
     <group {...props} dispose={null}>
       <mesh
@@ -32,16 +49,16 @@ const ReservoirModel = (props) => {
         position={[-0.07, 44.52, 0.04]}
         //onClick={(e) => console.log('water')}
         //onClick={() => setActive(!active)}
+        
       />
       <group position={[-20.45, 37.25, 22.43]} rotation={[0, Math.PI / 2, 0]}>
         <mesh
           geometry={nodes.Wellhead1_1.geometry}
           material={hovered_well1 ? activeColor : materials.Casing}
           //scale={hovered ? 1.1 : 1}
-          //onClick={(e) => console.log('wellhead1')}
           onPointerOver={(event) => hover_well1(true)}
           onPointerOut={(event) => hover_well1(false)}
-          onClick={() => setActive(!active)}
+          onClick={setWellhead_state}
         />
         <mesh
           geometry={nodes.Wellhead1_2.geometry}
@@ -54,7 +71,7 @@ const ReservoirModel = (props) => {
           material={hovered_well2 ? activeColor : materials.Casing}
           onPointerOver={(event) => hover_well2(true)}
           onPointerOut={(event) => hover_well2(false)}
-          onClick={(e) => console.log("wellhead2")}
+  
         />
         <mesh
           geometry={nodes.Wellhead2_2.geometry}
@@ -67,7 +84,7 @@ const ReservoirModel = (props) => {
           material={hovered_well3 ? activeColor : materials.Casing}
           onPointerOver={(event) => hover_well3(true)}
           onPointerOut={(event) => hover_well3(false)}
-          onClick={(e) => console.log("wellhead3")}
+  
         />
         <mesh
           geometry={nodes.Wellhead3_2.geometry}
@@ -80,7 +97,7 @@ const ReservoirModel = (props) => {
           material={hovered_well4 ? activeColor : materials.Casing}
           onPointerOver={(event) => hover_well4(true)}
           onPointerOut={(event) => hover_well4(false)}
-          onClick={(e) => console.log("wellhead4")}
+  
         />
         <mesh
           geometry={nodes.Wellhead4_2.geometry}
@@ -149,6 +166,10 @@ const ReservoirModel = (props) => {
     </group>
   );
 };
+
+
+
+
 
 export default ReservoirModel;
 useGLTF.preload("./models/ReservoirModel_3.glb");

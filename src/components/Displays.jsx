@@ -1,6 +1,8 @@
 import * as THREE from "three";
 import React, { useLayoutEffect, useRef, useMemo } from "react";
 import { Text } from "@react-three/drei";
+import useState from "./ReservoirModel"; 
+import create from "zustand";
 
 
 
@@ -36,8 +38,9 @@ const Label = ({text, position, fontSize}) => {
     </Text>
   );
 };
-
 const Sphere = () => {
+  const setWellhead_state = useState((state) => state.wellhead_state);
+
   return (
     <mesh position={[-20.45, 40.7, 22.9]}>
       <sphereBufferGeometry attach="geometry" args={[0.4]} />
