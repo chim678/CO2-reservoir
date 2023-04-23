@@ -7,10 +7,9 @@ import {
 import * as THREE from "three";
 //import GltfModel from "../utils/glbModel"
 
-
+/*
 export function Loader() {
- 
-  const { progress } = useProgress();
+   const { progress } = useProgress();
 
   return (
     <Html center>
@@ -18,7 +17,9 @@ export function Loader() {
     </Html>
     
   );
-}
+}*/
+
+
 const Experience = () => {
   return (
     <>

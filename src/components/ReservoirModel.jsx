@@ -5,29 +5,34 @@ import * as THREE from "three";
 import create from "zustand";
 
 import { mountStoreDevtool } from "simple-zustand-devtools";
+import useStore from "../utils/stateStore";
 
-
+/*
 export const useStore = create((set) => ({
   wellhead_state: false,
   setWellhead_state: () => set((state) => ({ wellhead_state: !state.wellhead_state})),
 }));
-
+*/
 
 if (process.env.NODE_ENV === "development") {
   mountStoreDevtool("Store", useStore);
 }
 
+
+
 const ReservoirModel = (props) => {
   const { nodes, materials } = useGLTF("./models/ReservoirModel_3.glb");
   //const [active, setActive] = useState(true);
+ 
   const [hovered_well1, hover_well1] = useState(false);
   const [hovered_well2, hover_well2] = useState(false);
   const [hovered_well3, hover_well3] = useState(false);
   const [hovered_well4, hover_well4] = useState(false);
 
+  /*
   const wellhead_state = useStore((state) => state.wellhead_state);
   const setWellhead_state = useStore((state) => state.setWellhead_state);
-
+*/
 
   //ToDo: move the cursor logic out of the model
   if (hovered_well1 || hovered_well2 || hovered_well3 || hovered_well4){
@@ -40,6 +45,8 @@ const ReservoirModel = (props) => {
     opacity: 0.8,
     transparent: true,
   });
+
+  const setReservoirSpin = useStore((state) => state.setReservoirSpin)
  
   return (
     <group {...props} dispose={null}>
@@ -58,7 +65,8 @@ const ReservoirModel = (props) => {
           //scale={hovered ? 1.1 : 1}
           onPointerOver={(event) => hover_well1(true)}
           onPointerOut={(event) => hover_well1(false)}
-          onClick={setWellhead_state}
+          //onClick={setWellhead_state}
+          onAfterRender={setReservoirSpin(false)}
         />
         <mesh
           geometry={nodes.Wellhead1_2.geometry}

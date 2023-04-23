@@ -89,3 +89,35 @@ html,
 .loadingScreen--started .loadingScreen__board {
   opacity: 0;
 }
+
+.spin-container {
+  text-align: center;
+  margin-top: 100px;
+}
+.spin {
+  position: center;
+  border: 3px solid #0D4B9F;
+  width: 50px;
+  height: 50px;
+  margin: 0 auto;
+  border-radius: 50%;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  animation: rotate 2s cubic-bezier(0.26, 1.36, 0.74, -0.29) infinite;
+}
+@keyframes rotate {
+  0% {
+    transform: rotateZ(-360deg)
+  }
+  100% {
+    transform: rotateZ(0deg)
+  }
+}
+
+#text {
+  color: #282c34;
+  font-family: Arial;
+  font-size: 22px;
+  position: relative;
+  top: -857px;
+}
