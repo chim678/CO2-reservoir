@@ -24,7 +24,7 @@ const Experience = () => {
   return (
     <>
       <OrbitControls />
-      <PerspectiveCamera makeDefault position={[60, 50, 60]} zoom={0.8} />
+      <PerspectiveCamera makeDefault position={[60, 50, 60]} zoom={0.7} />
       <axesHelper args={[70]} />
       <gridHelper args={[100, 10]} />
     </>

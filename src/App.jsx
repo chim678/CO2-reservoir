@@ -12,21 +12,30 @@ import {
   LoadingOutlined
   } from '@ant-design/icons';
 
+import { useProgress } from "@react-three/drei";
+
 import "./App.css";
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
+
 function App() {
 
-  const [reservoirSpin, setReservoirSpin] = useStore((state) => [state.reservoirSpin, state.setReservoirSpin])
+  //debugger
+  //const [reservoirSpin] = useStore((state) => [state.reservoirSpin]);
+  
+  const [reservoirSpin] = useState(false);
+  const { progress } = useProgress();
+  let load_text = Math.round(progress) + " % loaded";
+ 
+  
   return (
-<> <Spin 
+<>  <Spin 
       indicator={antIcon}
       spinning={reservoirSpin}
-      tip={'Loading Model...'}
+      tip={load_text}
       size="large">
-     <Canvas style={{height: "100vh", marginTop: "150px"}}>
-    <Suspense >
+     <Canvas style={{height: "100vh", marginTop: "10px"}}>
       <ReservoirModel />
       <Light
         intensity={0.3}
@@ -36,8 +45,7 @@ function App() {
         color2={"#6086b5"}
       />
       < Displays />
-      <Experience />
-      </Suspense>
+      <Experience /> 
     </Canvas>
     </Spin>
     

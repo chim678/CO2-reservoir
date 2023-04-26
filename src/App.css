@@ -6,7 +6,6 @@ html,
 }
 
 
-
 .loadingClass 
 {
   z-index: 10;
@@ -29,7 +28,6 @@ html,
 
 .mainCanvas 
 {
-
   height: 98vh !important;
   width: 200vh !important
 }

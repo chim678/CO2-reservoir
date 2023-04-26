@@ -3,10 +3,11 @@ import React, { useLayoutEffect, useRef, useMemo } from "react";
 import { Text } from "@react-three/drei";
 import useState from "./ReservoirModel"; 
 import create from "zustand";
-
+import useStore from "../utils/stateStore";
 
 
 function Line({ start, end }) {
+  const [wellhead_state] = useStore((state) => [state.wellhead_state]);
   const ref = useRef();
   useLayoutEffect(() => {
     ref.current.geometry.setFromPoints(
@@ -16,14 +17,13 @@ function Line({ start, end }) {
   return (
     <line ref={ref}>
       <bufferGeometry />
-      <lineBasicMaterial color="red" linewidth={100} visible={true} />
+      <lineBasicMaterial color="red" linewidth={100} visible={wellhead_state} />
     </line>
   );
 }
 
-
-
 const Label = ({text, position, fontSize}) => {
+  const [wellhead_state] = useStore((state) => [state.wellhead_state]);
   return (
     <Text
       //scale={[1.5, 1.5, 1.5]}
@@ -33,14 +33,14 @@ const Label = ({text, position, fontSize}) => {
       fontSize={fontSize}
       position={position}
       rotation={[0, Math.PI / 4, 0]}
+      visible={wellhead_state}
     >
   {text}
     </Text>
   );
 };
 const Sphere = () => {
-  const setWellhead_state = useState((state) => state.wellhead_state);
-
+  const [wellhead_state] = useStore((state) => [state.wellhead_state]);
   return (
     <mesh position={[-20.45, 40.7, 22.9]}>
       <sphereBufferGeometry attach="geometry" args={[0.4]} />
@@ -49,18 +49,19 @@ const Sphere = () => {
         color="#7B1818"
         opacity={1}
         transparent={true}
-        visible={true}
+        visible={wellhead_state}
       />
     </mesh>
   );
 };
 
-const Plane = ({ position, onClick, rotation }) => {
+const Plane = ({ position, rotation }) => {
+  const [wellhead_state] = useStore((state) => [state.wellhead_state]);
   return (
     <mesh
-      onClick={onClick}
       position={[-23.23, 53, 17]}
       rotation={[0, Math.PI / 4, -Math.PI / 2]}
+      visible={wellhead_state}
     >
       <boxBufferGeometry attach="geometry" args={[8, 16, 0.05]} />
       <meshBasicMaterial
@@ -83,6 +84,7 @@ const Displays = () => {
       <Label text={'Temperature:'} position={[-23.23, 54.5, 17.2]} fontSize = {0.8}/>
       <Label text={'Pressure:'} position={[-23.23, 53.5, 17.2]} fontSize = {0.8}/>
       <Label text={'MassFlow:'} position={[-23.23, 52.5, 17.2]} fontSize = {0.8}/>
+      
     </>
   );
 };
