@@ -23,6 +23,7 @@ export default function Light({
         distance={50}
         decay={2}
         position={[10, 45, 10]}
+   
       />
     </>
   );

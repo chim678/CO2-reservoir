@@ -6,7 +6,7 @@ const useStore = create((set) => ({
   setReservoirSpin:(val) => set({reservoirSpin: val}),
   wellhead_state: false,
   setWellhead_state: () => set((state) => ({ wellhead_state: !state.wellhead_state})),
-  
+  //setWellhead_state: (val) => set({wellhead_state: val}),
   
 
 }))
