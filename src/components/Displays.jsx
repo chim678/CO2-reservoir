@@ -125,7 +125,8 @@ const Plane = ({ position, rotation }) => {
   );
 };
 
-const Displays = () => {
+const Displays = (props) => {
+  //console.log(props)
   return (
     <>
       <Line start={[-20.45, 40.7, 22.9]} end={[-24.4, 49.2, 19.1]} />

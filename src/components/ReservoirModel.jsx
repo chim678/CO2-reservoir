@@ -19,8 +19,12 @@ if (process.env.NODE_ENV === "development") {
 }
 
 const ReservoirModel = (props) => {
+ 
+
   const { nodes, materials } = useGLTF("./models/ReservoirModel_3.glb");
   //const [active, setActive] = useState(true);
+  let position1 = nodes.Wellhead1.position;
+  props.onPosition1Change(position1);
 
   const [hovered_well1, hover_well1] = useState(false);
   const [hovered_well2, hover_well2] = useState(false);
@@ -39,6 +43,8 @@ const ReservoirModel = (props) => {
   if (hovered_well1 || hovered_well2 || hovered_well3 || hovered_well4) {
     document.body.style.cursor = "pointer";
   } else document.body.style.cursor = "default";
+  
+  console.log(document.body.style.cursor)
 
   //console.log(document.body.style.cursor);
 
@@ -64,8 +70,8 @@ const ReservoirModel = (props) => {
           //scale={hovered ? 1.1 : 1}
           onPointerOver={(event) => hover_well1(true)}
           onPointerOut={(event) => hover_well1(false)}
-          onClick={setWellhead_state}
-          onAfterRender={setReservoirSpin(false)}
+          // onClick={setWellhead_state}
+          // onAfterRender={setReservoirSpin(false)}
         />
         <mesh
           geometry={nodes.Wellhead1_2.geometry}
@@ -172,4 +178,4 @@ const ReservoirModel = (props) => {
 };
 
 export default ReservoirModel;
-useGLTF.preload("./models/ReservoirModel_3.glb");
+// useGLTF.preload("./models/ReservoirModel_3.glb");
