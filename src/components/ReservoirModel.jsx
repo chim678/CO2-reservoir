@@ -44,7 +44,6 @@ const ReservoirModel = (props) => {
     document.body.style.cursor = "pointer";
   } else document.body.style.cursor = "default";
   
-  console.log(document.body.style.cursor)
 
   //console.log(document.body.style.cursor);
 
@@ -70,8 +69,8 @@ const ReservoirModel = (props) => {
           //scale={hovered ? 1.1 : 1}
           onPointerOver={(event) => hover_well1(true)}
           onPointerOut={(event) => hover_well1(false)}
-          // onClick={setWellhead_state}
-          // onAfterRender={setReservoirSpin(false)}
+          onClick={setWellhead_state}
+          onAfterRender={setReservoirSpin(false)}
         />
         <mesh
           geometry={nodes.Wellhead1_2.geometry}

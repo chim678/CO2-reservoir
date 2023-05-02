@@ -26,7 +26,7 @@ function App() {
   const [position1, setPosition1] = useState(0);
   //console.log(position1);
   //debugger
-  const [reservoirSpin] = useStore((state) => [state.reservoirSpin]);
+  //const [reservoirSpin] = useStore((state) => [state.reservoirSpin]);
   //const [reservoirSpin] = useState(false);
   const { progress } = useProgress();
   let load_text = Math.round(progress) + " % loaded";

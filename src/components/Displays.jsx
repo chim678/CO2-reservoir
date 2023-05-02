@@ -89,10 +89,10 @@ function Line({ start, end }) {
   );
 }
 
-const Sphere = () => {
+const Sphere = ({ position }) => {
   const [wellhead_state] = useStore((state) => [state.wellhead_state]);
   return (
-    <mesh position={[-20.45, 40.7, 22.9]}>
+    <mesh position={position}>
       <sphereBufferGeometry attach="geometry" args={[0.4]} />
       <meshBasicMaterial
         attach="material"
@@ -105,12 +105,12 @@ const Sphere = () => {
   );
 };
 
-const Plane = ({ position, rotation }) => {
+const Plane = ({ position }) => {
   const [wellhead_state] = useStore((state) => [state.wellhead_state]);
   //console.log(wellhead_state)
   return (
     <mesh
-      position={[-24, 52.6, 19.0]}
+      position={position}
       rotation={[0, Math.PI / 4, 0]}
       visible={wellhead_state}
     >
@@ -126,42 +126,59 @@ const Plane = ({ position, rotation }) => {
 };
 
 const Displays = (props) => {
-  //console.log(props)
+  let initPos1 = props.position1;
   return (
     <>
-      <Line start={[-20.45, 40.7, 22.9]} end={[-24.4, 49.2, 19.1]} />
-      <Plane />
-      <Sphere />
+      <Line
+        start={[initPos1.x, initPos1.y + 3.46, initPos1.z + 0.47]}
+        end={[initPos1.x - 4, initPos1.y + 11.96, initPos1.z - 3.33]}
+      />
+      <Plane
+        position={[initPos1.x - 3.55, initPos1.y + 15.36, initPos1.z - 3.43]}
+      />
+      <Sphere position={[initPos1.x, initPos1.y + 3.46, initPos1.z + 0.47]} />
       <Measurment
-        position={[-21, 53.25, 16.4]}
+        position={[initPos1.x - 0.55, initPos1.y + 16, initPos1.z - 6.03]}
         text={"50 °C"}
         fontSize={0.6}
-        textPosition={[-20.4, 53.25, 15.9]}
+        textPosition={[initPos1.x, initPos1.y + 16, initPos1.z - 6.53]}
       />
       <Measurment
-        position={[-21, 52.0, 16.4]}
+        position={[initPos1.x - 0.55, initPos1.y + 14.75, initPos1.z - 6.03]}
         text={"2 bar"}
         fontSize={0.6}
-        textPosition={[-20.5, 52.0, 16.0]}
+        textPosition={[initPos1.x - 0.1, initPos1.y + 14.75, initPos1.z - 6.43]}
       />
       <Measurment
-        position={[-21, 50.75, 16.4]}
+        position={[initPos1.x - 0.55, initPos1.y + 13.51, initPos1.z - 6.03]}
         text={"5 kg/s"}
         fontSize={0.6}
-        textPosition={[-20.1, 50.75, 15.6]}
+        textPosition={[
+          initPos1.x + 0.34,
+          initPos1.y + 13.51,
+          initPos1.z - 6.83,
+        ]}
       />
       <Label
         text={"WELLHEAD 1.1"}
-        position={[-22.23, 54.7, 17.6]}
+        position={[initPos1.x - 1.79, initPos1.y + 17.46, initPos1.z - 4.83]}
         fontSize={0.8}
       />
       <Label
         text={"Temperature:"}
-        position={[-23.2, 53.2, 18.6]}
+        position={[initPos1.x - 2.76, initPos1.y + 15.96, initPos1.z - 3.83]}
         fontSize={0.6}
       />
-      <Label text={"Pressure:"} position={[-23.2, 52.0, 18.6]} fontSize={0.6} />
-      <Label text={"MassFlow:"} position={[-23.2, 50.8, 18.6]} fontSize={0.6} />
+      <Label
+        text={"Pressure:"}
+        position={[initPos1.x - 2.76, initPos1.y + 14.76, initPos1.z - 3.83]}
+        fontSize={0.6}
+      />
+      <Label
+        text={"MassFlow:"}
+        position={[initPos1.x - 2.76, initPos1.y + 13.56, initPos1.z - 3.83]}
+        fontSize={0.6}
+      />
     </>
   );
 };
