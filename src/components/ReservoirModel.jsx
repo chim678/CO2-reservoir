@@ -19,9 +19,9 @@ if (process.env.NODE_ENV === "development") {
 }
 
 const ReservoirModel = (props) => {
- 
-
-  const { nodes, materials } = useGLTF("./models/ReservoirModel_3.glb");
+  const { nodes, materials } = useGLTF(
+    "./models/ReservoirModel_compressed.glb"
+  );
   //const [active, setActive] = useState(true);
   let position1 = nodes.Wellhead1.position;
   props.onPosition1Change(position1);
@@ -43,7 +43,6 @@ const ReservoirModel = (props) => {
   if (hovered_well1 || hovered_well2 || hovered_well3 || hovered_well4) {
     document.body.style.cursor = "pointer";
   } else document.body.style.cursor = "default";
-  
 
   //console.log(document.body.style.cursor);
 
@@ -79,39 +78,33 @@ const ReservoirModel = (props) => {
       </group>
       <group position={[-6.79, 37.25, 22.43]} rotation={[0, Math.PI / 2, 0]}>
         <mesh
-          geometry={nodes.Wellhead2_1.geometry}
+          geometry={nodes.Wellhead1_1.geometry}
           material={hovered_well2 ? activeColor : materials.Casing}
           onPointerOver={(event) => hover_well2(true)}
           onPointerOut={(event) => hover_well2(false)}
         />
         <mesh
-          geometry={nodes.Wellhead2_2.geometry}
+          geometry={nodes.Wellhead1_2.geometry}
           material={hovered_well2 ? activeColor : materials.Nuts}
         />
       </group>
       <group position={[6.53, 37.25, 22.43]} rotation={[0, Math.PI / 2, 0]}>
         <mesh
-          geometry={nodes.Wellhead3_1.geometry}
+          geometry={nodes.Wellhead1_1.geometry}
           material={hovered_well3 ? activeColor : materials.Casing}
           onPointerOver={(event) => hover_well3(true)}
           onPointerOut={(event) => hover_well3(false)}
         />
-        <mesh
-          geometry={nodes.Wellhead3_2.geometry}
-          material={hovered_well3 ? activeColor : materials.Nuts}
-        />
+        <mesh geometry={nodes.Wellhead1_2.geometry} material={hovered_well3 ? activeColor : materials.Nuts} />
       </group>
       <group position={[20.85, 37.25, 22.43]} rotation={[0, Math.PI / 2, 0]}>
         <mesh
-          geometry={nodes.Wellhead4_1.geometry}
+          geometry={nodes.Wellhead1_1.geometry}
           material={hovered_well4 ? activeColor : materials.Casing}
           onPointerOver={(event) => hover_well4(true)}
           onPointerOut={(event) => hover_well4(false)}
         />
-        <mesh
-          geometry={nodes.Wellhead4_2.geometry}
-          material={hovered_well4 ? activeColor : materials.Nuts}
-        />
+        <mesh geometry={nodes.Wellhead1_2.geometry} material={hovered_well4 ? activeColor : materials.Nuts} />
       </group>
       <mesh
         geometry={nodes.Pipe1.geometry}
@@ -119,19 +112,9 @@ const ReservoirModel = (props) => {
         position={[-20.49, 36.64, 18.59]}
       />
       <mesh
-        geometry={nodes.Pipe5.geometry}
-        material={materials.Pipes}
-        position={[-20.48, 31.73, 23.04]}
-      />
-      <mesh
         geometry={nodes.Pipe2.geometry}
         material={materials.Pipes}
         position={[-6.83, 36.64, 18.59]}
-      />
-      <mesh
-        geometry={nodes.Pipe6.geometry}
-        material={materials.Pipes}
-        position={[-6.82, 31.73, 22.92]}
       />
       <mesh
         geometry={nodes.Pipe3.geometry}
@@ -139,14 +122,24 @@ const ReservoirModel = (props) => {
         position={[6.49, 36.64, 18.59]}
       />
       <mesh
-        geometry={nodes.Pipe7.geometry}
-        material={materials.Pipes}
-        position={[6.5, 31.73, 22.92]}
-      />
-      <mesh
         geometry={nodes.Pipe4.geometry}
         material={materials.Pipes}
         position={[20.8, 36.64, 18.59]}
+      />
+      <mesh
+        geometry={nodes.Pipe5.geometry}
+        material={materials.Pipes}
+        position={[-20.48, 31.73, 23.04]}
+      />
+      <mesh
+        geometry={nodes.Pipe6.geometry}
+        material={materials.Pipes}
+        position={[-6.82, 31.73, 22.92]}
+      />
+      <mesh
+        geometry={nodes.Pipe7.geometry}
+        material={materials.Pipes}
+        position={[6.5, 31.73, 22.92]}
       />
       <mesh
         geometry={nodes.Pipe8.geometry}
@@ -177,4 +170,4 @@ const ReservoirModel = (props) => {
 };
 
 export default ReservoirModel;
-// useGLTF.preload("./models/ReservoirModel_3.glb");
+useGLTF.preload("./models/ReservoirModel_compressed.glb");

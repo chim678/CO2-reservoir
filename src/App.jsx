@@ -26,7 +26,7 @@ function App() {
   const [position1, setPosition1] = useState(0);
   //console.log(position1);
   //debugger
-  //const [reservoirSpin] = useStore((state) => [state.reservoirSpin]);
+  const [reservoirSpin] = useStore((state) => [state.reservoirSpin]);
   //const [reservoirSpin] = useState(false);
   const { progress } = useProgress();
   let load_text = Math.round(progress) + " % loaded";
@@ -35,8 +35,8 @@ function App() {
   return (
 <>  <Spin 
       indicator={antIcon}
-      // spinning={reservoirSpin}
-      spinning={false}
+       spinning={reservoirSpin}
+      //spinning={false}
       tip={load_text}
       size="large">
      <Canvas style={{height: "100vh", marginTop: "10px"}}>
